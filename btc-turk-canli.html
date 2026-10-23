@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0b0e11">
+<title>BTC TÜRK KRİPTO CANLI</title>
+<style>
+:root{--bg:#0b0e11;--panel:#161a1e;--panel2:#1e2329;--line:#2b3139;--txt:#eaecef;--sub:#848e9c;--green:#0ecb81;--red:#f6465d;--accent:#2f6fed;--yellow:#f0b90b;--purple:#a78bfa}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+body{background:var(--bg);color:var(--txt);font-size:14px}
+.topbar{display:flex;align-items:center;gap:18px;padding:12px 20px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:19px;letter-spacing:.5px}
+.logo .b{color:var(--yellow)}.logo .t{color:#fff}
+.nav{display:flex;gap:16px;flex:1;flex-wrap:wrap}
+.nav a{color:var(--sub);text-decoration:none;font-weight:600;padding:6px 4px;cursor:pointer}
+.nav a.active,.nav a:hover{color:var(--txt)}
+.clock{color:var(--sub);font-variant-numeric:tabular-nums;font-size:13px}
+.btn{background:var(--yellow);color:#000;border:none;padding:8px 16px;border-radius:6px;font-weight:700;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+
+.stale-banner {
+  background: var(--red);
+  color: #fff;
+  text-align: center;
+  padding: 10px 16px;
+  font-weight: 800;
+  display: none;
+  position: sticky;
+  top: 57px;
+  z-index: 49;
+  box-shadow: 0 4px 15px rgba(246, 70, 93, 0.4);
+  font-size: 14px;
+}
+
+.wrap{max-width:1200px;margin:18px auto;padding:0 16px}
+.panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-bottom:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.ctitle{font-size:13px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px;color:var(--txt)}
+.ctitle .cnt{margin-left:auto;background:var(--panel2);color:var(--sub);font-size:11px;padding:2px 8px;border-radius:10px;font-weight:700}
+label.fl{display:block;font-size:11px;color:var(--sub);font-weight:600;margin-bottom:4px}
+input,select{background:var(--panel2);border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:7px;font-size:13px;outline:none;width:100%}
+input:focus,select:focus{border-color:var(--accent)}
+.row2{display:flex;gap:8px}.row2>div{flex:1}
+.pnlout{margin-top:12px;background:var(--panel2);border-radius:8px;padding:11px 13px;display:flex;justify-content:space-between;align-items:center}
+.pnlout .lbl{font-size:11px;color:var(--sub)}
+.pnlout .cur{font-size:13px;font-weight:700}
+.pnlout .val{font-size:17px;font-weight:800;text-align:right}
+.pnlout .pct{font-size:12px;text-align:right}
+.g{color:var(--green)}.r{color:var(--red)}.y{color:var(--yellow)}
+.tabs2{display:flex;gap:6px;margin-bottom:10px}
+.tb2{flex:1;text-align:center;padding:7px;border-radius:7px;border:1px solid var(--line);background:var(--panel2);color:var(--sub);font-size:12px;font-weight:700;cursor:pointer}
+.tb2.up{background:rgba(14,203,129,.12);border-color:var(--green);color:var(--green)}
+.tb2.dn{background:rgba(246,70,93,.12);border-color:var(--red);color:var(--red)}
+.rkrow,.lgrow,.sgrow{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:8px;background:var(--panel2);margin-bottom:5px;cursor:pointer;font-size:13px}
+.rkrow .rk{color:var(--sub);width:16px;font-size:11px}
+.rkrow .nm,.sgrow .nm{font-weight:700;flex:1}
+.rkrow .pr{color:var(--sub);font-size:12px;font-variant-numeric:tabular-nums}
+.rkrow .ch{font-weight:700;font-variant-numeric:tabular-nums}
+.scroll{max-height:220px;overflow-y:auto}
+.muted{text-align:center;color:var(--sub);font-size:12px;padding:16px}
+.tag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px}
+.tag.ob{background:rgba(246,70,93,.18);color:#fca5a5}
+.tag.os{background:rgba(14,203,129,.18);color:#86efac}
+.lgrow .tm{color:var(--sub);font-size:11px}
+.clrbtn{background:none;border:1px solid var(--line);color:var(--sub);border-radius:6px;padding:3px 9px;font-size:11px;cursor:pointer}
+.bar{display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.qbox{position:relative;flex:1;min-width:240px}
+#q{width:100%;padding-right:34px}
+.qx{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--panel);color:var(--sub);display:none;align-items:center;justify-content:center;cursor:pointer;font-size:12px}
+.qx.show{display:flex}
+.qx:hover{color:var(--txt);background:var(--line)}
+.tabs{display:flex;gap:8px}
+.tab{padding:9px 14px;border-radius:8px;background:var(--panel2);color:var(--sub);cursor:pointer;font-weight:600;width:auto}
+.tab.on{background:var(--yellow);color:#000}
+table{width:100%;border-collapse:collapse;background:var(--panel);border-radius:12px;overflow:hidden}
+thead th{text-align:left;color:var(--sub);font-weight:600;font-size:12px;padding:14px 12px;border-bottom:1px solid var(--line)}
+tbody td{padding:12px;border-bottom:1px solid var(--line);vertical-align:middle}
+
+/* TÜM SATIRIN ANLIK YANIP SÖNME ANİMASYONU */
+tbody tr.crow {
+  transition: background-color 1s ease-out;
+}
+@keyframes rowFlashGreen {
+  0% { background-color: rgba(14, 203, 129, 0.45) !important; }
+  100% { background-color: transparent; }
+}
+@keyframes rowFlashRed {
+  0% { background-color: rgba(246, 70, 93, 0.45) !important; }
+  100% { background-color: transparent; }
+}
+tbody tr.flash-g { animation: rowFlashGreen 0.9s ease-out; }
+tbody tr.flash-r { animation: rowFlashRed 0.9s ease-out; }
+
+tbody tr:hover{background:var(--panel2)}
+
+.star{color:#3a414a;cursor:pointer;font-size:16px;width:28px}
+.star.on{color:var(--yellow)}
+.pair{display:flex;align-items:center;gap:7px;cursor:pointer}
+.ico{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--yellow));display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff}
+.pair b{font-weight:700}.pair .sub{color:var(--sub);font-size:12px}.pair .nm{color:var(--sub);font-size:12px;margin-left:4px}
+.price{font-variant-numeric:tabular-nums;font-weight:600}
+.chg{font-weight:700;font-variant-numeric:tabular-nums}
+.vol{color:var(--sub);font-variant-numeric:tabular-nums}
+.tbtn{border:none;padding:6px 14px;border-radius:6px;font-weight:700;cursor:pointer;margin-right:6px}
+.tbtn.g{background:rgba(14,203,129,.15);color:var(--green)}
+.tbtn.r{background:rgba(246,70,93,.15);color:var(--red)}
+.tbtn.big2{flex:1;padding:13px;font-size:15px;margin:0}
+.empty{text-align:center;color:var(--sub);padding:40px}
+
+@media(max-width:700px){
+  body{font-size:15px;padding-bottom:env(safe-area-inset-bottom)}
+  .topbar{gap:10px;padding:10px 12px 10px calc(12px + env(safe-area-inset-left))}
+  .logo{font-size:17px}
+  .nav{order:3;flex:1 0 100%;gap:12px;margin-top:4px}
+  .btn{padding:7px 12px;font-size:13px}
+  .wrap{margin:12px auto;padding:0 10px}
+  .panels{grid-template-columns:1fr;gap:12px}
+  .vol,.sp{display:none}
+  .pair .nm{display:none}
+  .pair .sub{display:none}
+  thead th{padding:10px 8px;font-size:11px}
+  tbody td{padding:11px 8px}
+  .star{width:22px;font-size:18px}
+  .ico{width:30px;height:30px;font-size:13px}
+  .pair b{font-size:15px}
+  .price{font-size:14px}
+  .chg{font-size:14px}
+  .tbtn{padding:8px 12px;font-size:14px}
+  #q{min-width:0}
+  .tab{padding:10px 14px}
+  .mcard{max-width:100%;padding:16px;border-radius:16px}
+  .mprice .big{font-size:24px}
+  input,select{padding:11px 12px;font-size:16px}
+  .toast-wrap{left:10px;right:10px;max-width:none;top:calc(10px + env(safe-area-inset-top))}
+}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:flex-start;justify-content:center;z-index:100;padding:16px;overflow-y:auto}
+.mcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;width:100%;max-width:460px;padding:20px;margin:auto;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.mhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.mtit{display:flex;align-items:center;gap:10px}.mtit .ico{width:34px;height:34px;font-size:15px}.mtit b{font-size:17px}.mtit .nm{color:var(--sub);font-size:12px}
+.close{cursor:pointer;color:var(--sub);font-size:18px;padding:4px 8px;border-radius:6px}.close:hover{background:var(--panel2);color:var(--txt)}
+.mprice{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
+.mprice .big{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums}.mprice .big span{font-size:13px;color:var(--sub)}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.mi{background:var(--panel2);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:3px}
+.mi span{color:var(--sub);font-size:11px}.mi b{font-size:14px;font-variant-numeric:tabular-nums;transition:background-color .15s,color .15s;border-radius:4px;padding:0 2px}
+.mchart{background:var(--panel2);border-radius:10px;padding:10px 8px 6px;margin-bottom:14px}
+.mchart .ct{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--sub);margin:0 4px 6px}
+.mchart svg{display:block;width:100%;height:120px}
+.mchart .lv{font-variant-numeric:tabular-nums;font-weight:700}
+.mhd{font-size:12px;font-weight:700;margin:4px 0 8px;padding-left:7px;border-left:3px solid var(--yellow);color:var(--yellow)}
+.alarmbox{display:flex;gap:7px;margin-bottom:12px}
+.alarmbox input{flex:1}
+.alarmbox button{background:var(--yellow);color:#000;border:none;border-radius:7px;padding:0 14px;font-weight:700;cursor:pointer;white-space:nowrap}
+.mbtns{display:flex;gap:10px;margin-top:4px}
+.toast-wrap{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:8px;max-width:300px;width:100%}
+.toast{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 14px;box-shadow:0 10px 20px rgba(0,0,0,.4);animation:tin .3s ease;cursor:pointer}
+.toast.up{border-left:4px solid var(--green)}.toast.down{border-left:4px solid var(--red)}.toast.alarm{border-left:4px solid var(--yellow)}
+.toast .th{display:flex;justify-content:space-between;font-weight:700;font-size:13px;margin-bottom:3px}
+.toast .tbd{font-size:12px;color:var(--sub)}
+@keyframes tin{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+</style>
+</head>
+<body>
+<div class="toast-wrap" id="toastWrap"></div>
+<div class="topbar">
+  <div class="logo"><span class="b">BTC</span><span class="t">TÜRK</span></div>
+  <div class="nav"><a class="active">Piyasalar</a></div>
+  <span id="conn" style="font-size:12px;font-weight:700;color:var(--yellow)">● BAĞLANIYOR...</span>
+  <div class="clock" id="clock">--:--:--</div>
+  <button class="btn ghost">Giriş Yap</button>
+  <button class="btn">Kayıt Ol</button>
+</div>
+
+<div id="staleBanner" class="stale-banner">⚠️ CANLI VERİ AKIŞI DURDU / YENİLENMİYOR! İNTERNET BAĞLANTINIZI KONTROL EDİN.</div>
+
+<div class="wrap">
+  <div class="panels">
+    <div class="card">
+      <div class="ctitle">💰 Kâr / Zarar Hesapla</div>
+      <label class="fl">Coin Seç</label>
+      <select id="pnlCoin"><option value="">— Coin seç —</option></select>
+      <div class="row2" style="margin-top:8px">
+        <div><label class="fl">Miktar (adet)</label><input type="number" id="pnlAmt" placeholder="0"></div>
+        <div><label class="fl">Alış Fiyatı</label><input type="number" id="pnlBuy" placeholder="0.00"></div>
+      </div>
+      <div class="pnlout">
+        <div><div class="lbl">Anlık Fiyat</div><div class="cur" id="pnlCur">—</div></div>
+        <div><div class="val y" id="pnlVal">Coin seçiniz</div><div class="pct" id="pnlPct"></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ctitle">🏆 Canlı Sıralama</div>
+      <div class="tabs2"><div class="tb2 up" id="tbUp">▲ En Çok Yükselen</div><div class="tb2" id="tbDn">▼ En Çok Düşen</div></div>
+      <div id="rankBox"></div>
+    </div>
+    <div class="card">
+      <div class="ctitle">⚡ Değişim Uyarıları <span class="cnt" id="alCnt">0</span></div>
+      <label class="fl">Eşik (%) — bu orandan fazla oynayan coin bildirilir</label>
+      <input type="number" id="alThr" value="1" step="0.5">
+      <div class="scroll" id="alLog" style="margin-top:10px"><div class="muted">Anlık değişimler burada listelenir...</div></div>
+      <button class="clrbtn" id="alClear" style="margin-top:8px">Temizle</button>
+    </div>
+    <div class="card">
+      <div class="ctitle">📡 Teknik Sinyaller (RSI) <span class="cnt" id="sgCnt">0</span></div>
+      <div class="scroll" id="sgBox"><div class="muted">Veri toplanıyor...</div></div>
+    </div>
+  </div>
+  <div class="bar">
+    <div class="qbox"><input id="q" placeholder="Coin ara (örn. FB, BTC, GS, ETH)..."><span id="qClear" class="qx">✕</span></div>
+    <div class="tabs"><span class="tab on" id="tabAll">Tümü</span><span class="tab" id="tabTRY">TRY</span><span class="tab" id="tabUSDT">USDT</span><span class="tab" id="tabFav">★ Favoriler</span></div>
+  </div>
+  <table>
+    <thead><tr><th></th><th>Çift</th><th>Son Fiyat</th><th>24s Değişim</th><th>Hacim</th><th>Grafik</th><th>İşlem</th></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+<div id="modalHost"></div>
+
+<script>
+let favs=new Set(), search="", tab='all', rankMode='up';
+let alLog=[], sgList=[];
+let mkt={};      
+let market=[];   
+let lastOk = Date.now();
+
+function fmtRaw(v){
+  if(v === undefined || v === null || isNaN(v)) return '0';
+  return v.toString().replace('.', ',');
+}
+
+function spark(h,up){
+  const w=80,ht=28,mn=Math.min(...h),mx=Math.max(...h),r=(mx-mn)||1;
+  const pts=h.map((v,i)=>`${(i/(h.length-1)*w).toFixed(1)},${(ht-((v-mn)/r)*ht).toFixed(1)}`).join(' ');
+  return `<svg width="${w}" height="${ht}"><polyline fill="none" stroke="${up?'var(--green)':'var(--red)'}" stroke-width="1.5" points="${pts}"/></svg>`;
+}
+
+function bigChart(h,up){
+  const w=420,ht=120,pd=4;
+  if(!h||h.length<2) return `<svg viewBox="0 0 ${w} ${ht}" preserveAspectRatio="none"></svg>`;
+  const mn=Math.min(...h),mx=Math.max(...h),r=(mx-mn)||1;
+  const X=i=>(i/(h.length-1)*(w-pd*2)+pd);
+  const Y=v=>(ht-pd-((v-mn)/r)*(ht-pd*2));
+  const line=h.map((v,i)=>`${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
+  const area=`${pd},${ht-pd} ${line} ${(w-pd)},${ht-pd}`;
+  const col=up?'var(--green)':'var(--red)';
+  const gid=up?'gradUp':'gradDn';
+  return `<svg viewBox="0 0 ${w} ${ht}" preserveAspectRatio="none"><defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${col}" stop-opacity="0.35"/><stop offset="1" stop-color="${col}" stop-opacity="0"/></linearGradient></defs><polygon fill="url(#${gid})" points="${area}"/><polyline fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round" points="${line}"/></svg>`;
+}
+
+function rsi(h){
+  if(h.length<6)return 50;
+  let g=0,l=0,n=Math.min(h.length-1,14);
+  for(let i=h.length-n;i<h.length;i++){
+    let d=h[i]-h[i-1];
+    if(d>0)g+=d;else l-=d;
+  }
+  if(g+l===0)return 50;
+  return Math.round(100-(100/(1+(g/(l||1e-9)))));
+}
+
+function renderTable(){
+  const rows=market.filter(c=>{
+    if(tab==='fav'&&!favs.has(c.s))return false;
+    if((tab==='TRY'||tab==='USDT')&&c.q!==tab)return false;
+    if(search){
+      const q=search.toLowerCase();
+      if(!c.s.toLowerCase().includes(q) && !c.n.toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
+
+  const tb=document.getElementById('tbody');
+  if(!tb) return;
+
+  rows.forEach(c => {
+    const ch = c.dp || 0;
+    const up = ch >= 0;
+    let tr = tb.querySelector(`tr[data-s="${c.s}"]`);
+    
+    if(!tr) {
+      tr = document.createElement('tr');
+      tr.className = 'crow';
+      tr.setAttribute('data-s', c.s);
+      tr.innerHTML = `
+        <td class="star ${favs.has(c.s)?'on':''}" data-fav="${c.s}">★</td>
+        <td class="pair" data-open="${c.s}"><span class="ico">${c.s[0]}</span><b>${c.b}</b><span class="sub">/${c.q}</span><span class="nm">${c.n}</span><span class="alarm-icon">${c.alarm?' 🔔':''}</span></td>
+        <td class="price">${fmtRaw(c.price)}</td>
+        <td class="chg ${up?'g':'r'}">${up?'+':''}${fmtRaw(ch)}%</td>
+        <td class="vol">${fmtRaw(c.vol)} ${c.q}</td>
+        <td class="sp">${spark(c.hist,up)}</td>
+        <td><button class="tbtn g" data-open="${c.s}">Al</button><button class="tbtn r" data-open="${c.s}">Sat</button></td>
+      `;
+      tb.appendChild(tr);
+
+      tr.querySelector('[data-fav]').onclick = (e) => {
+        e.stopPropagation();
+        favs.has(c.s)?favs.delete(c.s):favs.add(c.s);
+        renderTable();
+      };
+      tr.querySelectorAll('[data-open]').forEach(el => el.onclick = (e) => {
+        e.stopPropagation();
+        openDetail(c.s);
+      });
+    } else {
+      if(c.flash) {
+        tr.classList.remove('flash-g', 'flash-r');
+        void tr.offsetWidth;
+        tr.classList.add(c.flash === 'up' ? 'flash-g' : 'flash-r');
+        c.flash = null;
+      }
+
+      tr.querySelector('.price').textContent = fmtRaw(c.price);
+      const chgTd = tr.querySelector('.chg');
+      chgTd.textContent = `${up?'+':''}${fmtRaw(ch)}%`;
+      chgTd.className = `chg ${up?'g':'r'}`;
+      
+      const volTd = tr.querySelector('.vol');
+      if(volTd) volTd.textContent = `${fmtRaw(c.vol)} ${c.q}`;
+      
+      const spTd = tr.querySelector('.sp');
+      if(spTd) spTd.innerHTML = spark(c.hist, up);
+      
+      const alarmSpan = tr.querySelector('.alarm-icon');
+      if(alarmSpan) alarmSpan.textContent = c.alarm ? ' 🔔' : '';
+    }
+  });
+
+  Array.from(tb.querySelectorAll('tr[data-s]')).forEach(tr => {
+    const s = tr.getAttribute('data-s');
+    if(!rows.find(c => c.s === s)) tr.remove();
+  });
+
+  if(!rows.length) {
+    tb.innerHTML = `<tr><td colspan=7 class="empty">${market.length?'Sonuç bulunamadı':'🔄 Piyasa verileri yükleniyor...'}</td></tr>`;
+  }
+}
+
+function renderRanks(){
+  const sorted=[...market].sort((a,b)=>(rankMode==='up' ? (b.dp - a.dp) : (a.dp - b.dp))).slice(0,8);
+  document.getElementById('rankBox').innerHTML=sorted.map((c,i)=>{
+    const ch=c.dp||0, up=ch>=0;
+    return `<div class="rkrow" data-open="${c.s}"><span class="rk">${i+1}</span><span class="ico" style="width:20px;height:20px;font-size:10px">${c.s[0]}</span><span class="nm">${c.s}</span><span class="pr">${fmtRaw(c.price)}</span><span class="ch ${up?'g':'r'}">${up?'+':''}${fmtRaw(ch)}%</span></div>`;
+  }).join('');
+  document.getElementById('rankBox').querySelectorAll('[data-open]').forEach(el=>el.onclick=()=>openDetail(el.dataset.open));
+}
+
+function renderSignals(){
+  sgList=[];
+  market.forEach(c=>{const r=rsi(c.hist);if(r>=70)sgList.push({s:c.s,r,t:'ob'});else if(r<=30)sgList.push({s:c.s,r,t:'os'});});
+  sgList.sort((a,b)=>b.t==='ob'?b.r-a.r:a.r-b.r);
+  document.getElementById('sgCnt').textContent=sgList.length;
+  const box=document.getElementById('sgBox');
+  box.innerHTML=sgList.length?sgList.slice(0,12).map(x=>`<div class="sgrow" data-open="${x.s}"><span class="nm">${x.s}</span><span class="tag ${x.t}">${x.t==='ob'?'AŞIRI ALIM':'AŞIRI SATIM'} · RSI ${x.r}</span></div>`).join(''):'<div class="muted">Henüz sinyal yok</div>';
+  box.querySelectorAll('[data-open]').forEach(el=>el.onclick=()=>openDetail(el.dataset.open));
+}
+
+function buildPnlOptions(){
+  const sel=document.getElementById('pnlCoin');
+  if(sel.options.length-1===market.length)return;
+  const keep=sel.value;
+  sel.innerHTML='<option value="">— Coin seç —</option>'+market.map(c=>`<option value="${c.s}">${c.b}/${c.q}</option>`).join('');
+  sel.value=keep;
+}
+
+function calcPnl(){
+  const s=document.getElementById('pnlCoin').value;
+  const c=market.find(x=>x.s===s);
+  const cur=document.getElementById('pnlCur'),val=document.getElementById('pnlVal'),pct=document.getElementById('pnlPct');
+  if(!c){cur.textContent='—';val.textContent='Coin seçiniz';val.className='val y';pct.textContent='';return;}
+  cur.textContent=fmtRaw(c.price)+' '+c.q;
+  const amt=parseFloat(document.getElementById('pnlAmt').value)||0;
+  const buy=parseFloat(document.getElementById('pnlBuy').value)||0;
+  if(amt<=0||buy<=0){val.textContent='Miktar & alış gir';val.className='val y';pct.textContent='';return;}
+  const diff=(c.price-buy)*amt,p=(c.price-buy)/buy*100,up=diff>=0;
+  val.textContent=(up?'+':'')+fmtRaw(diff)+' '+c.q;val.className='val '+(up?'g':'r');
+  pct.textContent=(up?'+':'')+fmtRaw(p)+'%';pct.className='pct '+(up?'g':'r');
+}
+
+function toast(kind,title,body){
+  const w=document.getElementById('toastWrap');
+  const d=document.createElement('div');d.className='toast '+kind;
+  d.innerHTML=`<div class="th"><span>${title}</span></div><div class="tbd">${body}</div>`;
+  d.onclick=()=>d.remove();
+  w.appendChild(d);
+  setTimeout(()=>{d.style.transition='opacity .4s';d.style.opacity='0';setTimeout(()=>d.remove(),400);},6000);
+  while(w.children.length>5)w.removeChild(w.firstChild);
+}
+
+function checkAlerts(){
+  const thr=Math.abs(parseFloat(document.getElementById('alThr').value)||1);
+  market.forEach(c=>{
+    if(c.hist.length>=2){
+      const prev=c.hist[c.hist.length-2],d=(c.price-prev)/prev*100;
+      if(Math.abs(d)>=thr){
+        const up=d>=0;
+        alLog.unshift({s:c.s,d,t:new Date().toLocaleTimeString('tr-TR'),up});
+        if(alLog.length>60)alLog.pop();
+        toast(up?'up':'down',(up?'▲ ':'▼ ')+c.s,`Anlık ${up?'+':''}${fmtRaw(d)}% · ${fmtRaw(c.price)} ${c.q}`);
+      }
+    }
+    if(c.alarm){
+      const a=c.alarm;
+      if((a.dir==='up'&&c.price>=a.price)||(a.dir==='down'&&c.price<=a.price)){
+        toast('alarm','🔔 '+c.s+' Alarmı',`Fiyat ${a.dir==='up'?'≥':'≤'} ${fmtRaw(a.price)} ${c.q} oldu · şu an ${fmtRaw(c.price)}`);
+        c.alarm=null;
+      }
+    }
+  });
+  document.getElementById('alCnt').textContent=alLog.length;
+  const box=document.getElementById('alLog');
+  box.innerHTML=alLog.length?alLog.slice(0,30).map(x=>`<div class="lgrow" data-open="${x.s}"><span class="nm">${x.s}</span><span class="ch ${x.up?'g':'r'}">${x.up?'+':''}${fmtRaw(x.d)}%</span><span class="tm">${x.t}</span></div>`).join(''):'<div class="muted">Anlık değişimler burada listelenir...</div>';
+  box.querySelectorAll('[data-open]').forEach(el=>el.onclick=()=>openDetail(el.dataset.open));
+}
+
+let detailSym=null;
+function openDetail(sym){detailSym=sym;renderDetail(true);}
+function closeDetail(){detailSym=null;document.getElementById('modalHost').innerHTML='';}
+function renderDetail(rebuild){
+  if(!detailSym)return;
+  const c=market.find(x=>x.s===detailSym);if(!c)return;
+  const ch=c.dp||0,up=ch>=0,bid=c.bid||c.price,ask=c.ask||c.price;
+  const host=document.getElementById('modalHost');
+  if(rebuild){
+    host.innerHTML=`<div class="modal" id="dmodal"><div class="mcard">
+      <div class="mhead"><div class="mtit"><span class="ico">${c.s[0]}</span><div><b>${c.b}/${c.q}</b><div class="nm">${c.n}</div></div></div><span class="close" id="dx">✕</span></div>
+      <div class="mprice"><div class="big" id="dBig"></div><div class="chg" id="dChg" style="font-size:16px"></div></div>
+      <div class="mchart"><div class="ct"><span>Canlı Grafik (son fiyatlar)</span><span class="lv" id="dLv"></span></div><div id="dChart"></div></div>
+      <div class="mgrid">
+        <div class="mi"><span>En İyi Alış</span><b class="g" id="dBid"></b></div>
+        <div class="mi"><span>En İyi Satış</span><b class="r" id="dAsk"></b></div>
+        <div class="mi"><span>24s En Düşük</span><b id="dLow"></b></div>
+        <div class="mi"><span>24s En Yüksek</span><b id="dHigh"></b></div>
+        <div class="mi"><span>RSI (14)</span><b id="dRsi"></b></div>
+        <div class="mi"><span>24s Hacim (${c.q})</span><b id="dVol"></b></div>
+      </div>
+      <div class="mhd">🔔 Fiyat Alarmı Kur</div>
+      <div class="alarmbox"><input type="number" id="dAlarm" placeholder="Hedef fiyat (${c.q})"><button id="dAlarmBtn">Alarm Kur</button></div>
+      <div id="dAlarmInfo" style="font-size:12px;color:var(--sub);margin-bottom:12px"></div>
+      <div class="mbtns"><button class="tbtn g big2">Al</button><button class="tbtn r big2">Sat</button></div>
+    </div></div>`;
+    document.getElementById('dmodal').onclick=e=>{if(e.target.id==='dmodal')closeDetail();};
+    document.getElementById('dx').onclick=closeDetail;
+    document.getElementById('dAlarmBtn').onclick=()=>{
+      const v=parseFloat(document.getElementById('dAlarm').value);
+      if(!v||v<=0){document.getElementById('dAlarmInfo').textContent='Geçerli bir fiyat girin.';return;}
+      c.alarm={price:v,dir:v>=c.price?'up':'down'};
+      renderTable();updateAlarmInfo(c);
+    };
+  }
+  const g=id=>document.getElementById(id);
+  if(!g('dBig'))return;
+  g('dBig').innerHTML=fmtRaw(c.price)+' <span>'+c.q+'</span>';g('dBig').className='big '+(up?'g':'r');
+  g('dChg').textContent=(up?'▲ +':'▼ ')+fmtRaw(ch)+'%';g('dChg').className='chg '+(up?'g':'r');
+  
+  g('dBid').textContent=fmtRaw(bid);
+  g('dAsk').textContent=fmtRaw(ask);
+  g('dLow').textContent=fmtRaw(c.low);
+  g('dHigh').textContent=fmtRaw(c.high);
+  g('dRsi').textContent=rsi(c.hist);
+  g('dVol').textContent=fmtRaw(c.vol);
+  
+  const ce=g('dChart');if(ce)ce.innerHTML=bigChart(c.hist,up);
+  const lv=g('dLv');if(lv){lv.textContent=fmtRaw(c.price)+' '+c.q;lv.style.color=up?'var(--green)':'var(--red)';}
+  updateAlarmInfo(c);
+}
+function updateAlarmInfo(c){const el=document.getElementById('dAlarmInfo');if(!el)return;el.innerHTML=c.alarm?`Aktif alarm: fiyat <b class="y">${c.alarm.dir==='up'?'≥':'≤'} ${fmtRaw(c.alarm.price)} ${c.q}</b> olunca bildirilecek.`:'Henüz alarm yok.';}
+
+document.getElementById('q').oninput=e=>{search=e.target.value;document.getElementById('qClear').classList.toggle('show',!!search);renderTable();};
+document.getElementById('qClear').onclick=()=>{search='';const q=document.getElementById('q');q.value='';document.getElementById('qClear').classList.remove('show');renderTable();q.focus();};
+document.getElementById('tabAll').onclick=()=>{tab='all';document.getElementById('tabAll').classList.add('on');document.getElementById('tabFav').classList.remove('on');renderTable();};
+document.getElementById('tabFav').onclick=()=>{tab='fav';document.getElementById('tabFav').classList.add('on');document.getElementById('tabAll').classList.remove('on');renderTable();};
+document.getElementById('tbUp').onclick=()=>{rankMode='up';document.getElementById('tbUp').className='tb2 up';document.getElementById('tbDn').className='tb2';renderRanks();};
+document.getElementById('tbDn').onclick=()=>{rankMode='dn';document.getElementById('tbDn').className='tb2 dn';document.getElementById('tbUp').className='tb2';renderRanks();};
+document.getElementById('pnlCoin').onchange=calcPnl;
+document.getElementById('pnlAmt').oninput=calcPnl;
+document.getElementById('pnlBuy').oninput=calcPnl;
+document.getElementById('alClear').onclick=()=>{alLog=[];checkAlerts();};
+
+function setConn(ok){
+  const el=document.getElementById('conn');
+  const banner=document.getElementById('staleBanner');
+  if(el){
+    el.textContent=ok?('● CANLI · '+srcName+' · '+market.length+' çift'):'● BAĞLANTI KESİLDİ';
+    el.style.color=ok?'var(--green)':'var(--red)';
+  }
+  if(banner){
+    banner.style.display = ok ? 'none' : 'block';
+  }
+}
+
+function processData(list){
+  if(!list || !list.length) return;
+  list.forEach(i=>{
+    const sym = i.pair || i.pairSymbol || i.symbol || i.s || '';
+    if(!sym) return;
+    
+    const s = i.key || sym;
+    const price = parseFloat(i.last || i.lastPrice || i.p || i.c || 0);
+    if(!price || price <= 0) return;
+
+    let c = mkt[s];
+    if(!c){
+      c = {
+        s: s, b: i.base || s, q: i.quote || 'TRY',
+        n: i.name || s,
+        price: price,
+        open: parseFloat(i.open || price),
+        low: parseFloat(i.low || price),
+        high: parseFloat(i.high || price),
+        vol: parseFloat(i.volume || i.quoteVolume || 0),
+        dp: parseFloat(i.dailyPercent || i.priceChangePercent || 0),
+        bid: parseFloat(i.bid || price),
+        ask: parseFloat(i.ask || price),
+        alarm: null,
+        prevPrice: price,
+        hist: [price]
+      };
+      mkt[s] = c;
+    }
+
+    c.prevPrice = c.price;
+    if(price > c.prevPrice) c.flash = 'up';
+    else if(price < c.prevPrice) c.flash = 'down';
+
+    c.price = price;
+    c.open = parseFloat(i.open || c.open);
+    c.high = parseFloat(i.high || c.high);
+    c.low = parseFloat(i.low || c.low);
+    c.bid = parseFloat(i.bid || price);
+    c.ask = parseFloat(i.ask || price);
+    c.vol = parseFloat(i.volume || c.vol);
+    c.dp = parseFloat(i.dailyPercent !== undefined ? i.dailyPercent : c.dp);
+
+    c.hist.push(price);
+    if(c.hist.length > 40) c.hist.shift();
+  });
+
+  market = Object.values(mkt);
+  lastOk = Date.now();
+  setConn(true);
+  renderAll();
+}
+
+// ================= VERİ KAYNAKLARI (otomatik yedekli) =================
+const BT = 'https://api.btcturk.com/api/v2/ticker';
+const BN_SYMS = ['BTCTRY','ETHTRY','BNBTRY','XRPTRY','SOLTRY','ADATRY','DOGETRY','AVAXTRY','USDTTRY','TRXTRY','DOTTRY','LINKTRY','LTCTRY','SHIBTRY','PEPETRY'];
+const BN = 'https://data-api.binance.vision/api/v3/ticker/24hr?symbols=' + encodeURIComponent(JSON.stringify(BN_SYMS));
+
+// type: bt = BtcTurk formatı, bn = Binance formatı
+const SOURCES = [
+  {name:'BtcTurk',          url: BT,                                                         type:'bt'},
+  {name:'BtcTurk (proxy 1)',url:'https://corsproxy.io/?url=' + encodeURIComponent(BT),        type:'bt'},
+  {name:'BtcTurk (proxy 2)',url:'https://api.allorigins.win/raw?url=' + encodeURIComponent(BT),type:'bt'},
+  {name:'BtcTurk (proxy 3)',url:'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(BT), type:'bt'},
+  {name:'Binance (YEDEK - az coin)',   url: BN,                                                         type:'bn'}
+];
+let srcIdx = 0, inFlight = false, failCount = 0, srcName = '';
+
+function normBt(data){
+  const arr = (data && data.data) ? data.data : data;
+  if(!Array.isArray(arr)) throw new Error('beklenmeyen BtcTurk yanıtı');
+  return arr.filter(x => x.pair && x.numeratorSymbol && x.denominatorSymbol).map(x => {
+    const last = parseFloat(x.last), base = x.numeratorSymbol, quote = x.denominatorSymbol;
+    return {
+      pairSymbol: String(x.pair), key: quote === 'TRY' ? base : base + '/' + quote,
+      base: base, quote: quote, name: base,
+      last: last, open: x.open, high: x.high, low: x.low,
+      volume: (parseFloat(x.volume) || 0) * (last || 0),   // coin cinsinden hacmi karşı birime çevir
+      dailyPercent: x.dailyPercent, bid: x.bid, ask: x.ask
+    };
+  });
+}
+function normBn(data){
+  if(!Array.isArray(data)) throw new Error('beklenmeyen Binance yanıtı');
+  return data.filter(x => x.symbol && x.symbol.endsWith('TRY')).map(x => {
+    const base = x.symbol.replace(/TRY$/,'');
+    return {
+      pairSymbol: x.symbol, key: base, base: base, quote: 'TRY', name: base,
+      last: x.lastPrice, open: x.openPrice, high: x.highPrice, low: x.lowPrice,
+      volume: x.quoteVolume, dailyPercent: x.priceChangePercent, bid: x.bidPrice, ask: x.askPrice
+    };
+  });
+}
+
+async function fetchWithTimeout(url, ms){
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), ms);
+  try {
+    const res = await fetch(url, {cache:'no-store', signal: ctl.signal});
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    return await res.json();
+  } finally { clearTimeout(t); }
+}
+
+async function fetchGlobalPrices(){
+  if(inFlight) return;
+  if(Date.now() - wsLast < 8000) return;   // WebSocket canlıysa REST'e gerek yok
+  inFlight = true;
+  try {
+    for(let k = 0; k < SOURCES.length; k++){
+      const idx = (srcIdx + k) % SOURCES.length;
+      const s = SOURCES[idx];
+      try {
+        const data = await fetchWithTimeout(s.url, 5000);
+        const list = s.type === 'bt' ? normBt(data) : normBn(data);
+        if(!list.length) throw new Error('boş liste');
+        srcIdx = idx; srcName = s.name;   // çalışan kaynağı hatırla
+        failCount = 0;
+        processData(list);
+        return;
+      } catch(e){
+        console.warn('[Kaynak hata]', s.name, e.message || e);
+      }
+    }
+    failCount++;
+    setConn(false);
+  } finally { inFlight = false; }
+}
+
+function schedule(){
+  setTimeout(async () => { await fetchGlobalPrices(); schedule(); }, failCount ? 3000 : 1500);
+}
+
+function renderAll(){
+  buildPnlOptions();
+  renderTable();
+  renderRanks();
+  renderSignals();
+  calcPnl();
+  checkAlerts();
+  renderDetail(false);
+}
+
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleTimeString('tr-TR');},1000);
+document.getElementById('clock').textContent=new Date().toLocaleTimeString('tr-TR');
+
+
+// ================= BtcTurk WebSocket (CORS'a takılmaz, TÜM çiftler) =================
+let ws = null, wsLast = 0, wsRetry = 0, wsTimer = null, wsPending = {};
+function normWs(items){
+  const out = [];
+  items.forEach(x => {
+    if(!x || !x.PS || !x.NS || !x.DS) return;
+    const last = parseFloat(x.LA);
+    if(!last) return;
+    out.push({
+      pairSymbol: String(x.PS), key: x.DS === 'TRY' ? x.NS : x.NS + '/' + x.DS,
+      base: x.NS, quote: x.DS, name: x.NS,
+      last: last, open: x.O, high: x.H, low: x.L,
+      volume: (parseFloat(x.V) || 0) * last,
+      dailyPercent: x.DP, bid: x.B, ask: x.A
+    });
+  });
+  return out;
+}
+function wsConnect(){
+  if(ws && (ws.readyState === 0 || ws.readyState === 1)) return;
+  try { ws = new WebSocket('wss://ws-feed-pro.btcturk.com'); }
+  catch(e){ return wsReconnect(); }
+  ws.onopen = () => {
+    ws.send(JSON.stringify([151, {type:151, channel:'ticker', event:'all', join:true}]));
+  };
+  ws.onmessage = ev => {
+    try {
+      const m = JSON.parse(ev.data);
+      const pl = Array.isArray(m) ? m[1] : m;
+      if(!pl) return;
+      const items = Array.isArray(pl.items) ? pl.items : (pl.PS ? [pl] : null);
+      if(!items) return;
+      normWs(items).forEach(t => { wsPending[t.key] = t; });
+      wsLast = Date.now(); wsRetry = 0;
+    } catch(e){}
+  };
+  ws.onerror = () => { try{ws.close();}catch(e){} };
+  ws.onclose = () => wsReconnect();
+}
+function wsReconnect(){
+  if(wsTimer) return;
+  wsRetry++;
+  wsTimer = setTimeout(() => { wsTimer = null; wsConnect(); }, Math.min(1000 * wsRetry, 10000));
+}
+// 1 saniyede bir toplu işle (ekran donmasın)
+setInterval(() => {
+  const list = Object.values(wsPending);
+  if(!list.length) return;
+  wsPending = {};
+  srcName = 'BtcTurk WebSocket';
+  processData(list);
+}, 1000);
+// 20 sn mesaj gelmezse bağlantıyı yenile
+setInterval(() => {
+  if(ws && ws.readyState === 1 && wsLast && Date.now() - wsLast > 20000){ try{ws.close();}catch(e){} }
+}, 5000);
+
+// Çalıştırma ve periyodik güncelleme (istekler üst üste binmez)
+wsConnect();
+fetchGlobalPrices().then(schedule);
+
+// Sekme tekrar görünür olunca / internet gelince hemen yenile
+document.addEventListener('visibilitychange', () => { if(!document.hidden){ wsConnect(); fetchGlobalPrices(); } });
+window.addEventListener('online', () => { wsConnect(); fetchGlobalPrices(); });
+
+// Kesinti takibi
+setInterval(()=>{
+  if(Date.now() - lastOk > 12000) setConn(false);
+}, 1000);
+
+// Sekmeler (Tümü / TRY / USDT / Favoriler)
+['All','TRY','USDT','Fav'].forEach(n=>{
+  document.getElementById('tab'+n).onclick=()=>{
+    tab = n==='All' ? 'all' : n==='Fav' ? 'fav' : n;
+    ['All','TRY','USDT','Fav'].forEach(m=>document.getElementById('tab'+m).classList.toggle('on',m===n));
+    renderTable();
+  };
+});
+</script>
+</body>
+</html>
